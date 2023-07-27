@@ -276,6 +276,7 @@
                         $data2 = mysqli_query($conn,"SELECT * FROM bengkel INNER JOIN kecamatan ON bengkel.id_kecamatan= kecamatan.id_kecamatan");
                         while ($result2= mysqli_fetch_array($data2)){
                         ?>
+                  // [ambil route]
                         L.marker([<?= $latitude = $result2['latitude']; ?>, <?= $longitude = $result2['longitude']; ?>], {icon:icon1}).on('click', function(){markerOnClick(<?= $result2['latitude']; ?>, <?= $result2['longitude']; ?>)})
                         .bindPopup("<b>Nama Bengkel : <?= $nama_bengkel = $result2['nama_bengkel']; ?></b><br>Kecamatan : <?= $kecamatan = $result2['kecamatan']; ?><br>Jam Buka : <?= $jam_buka = $result2['jam_buka']; ?> - <?= $jam_tutup = $result2['jam_tutup']; ?><br>Kategori : <?= $kategori = $result2['kategori_bengkel']; ?>")
                         .addTo(map);
@@ -283,18 +284,16 @@
                         }
                   
                   ?>
+                  // [ambil route] logic
                         var long = "";
                         var lat = "";
                         window.onload = getLocation;
                         async function markerOnClick(paralat, paralong)
                         {
-                          // await getLocation();
                           console.log(lat)
                           console.log(long)
-                          // console.log("https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route="+lat+","+long+";"+paralat+","+paralong);
                           window.location.href = "https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route="+lat+","+long+";"+paralat+","+paralong;
-                          // window.location.href = "https://www.google.com";
-                          // alert("test");
+                          
                         }
                         
                         function getLocation() {
@@ -308,6 +307,7 @@
                           lat =  position.coords.latitude;
                           long = position.coords.longitude;
                         }
+                    // 
                                           <?php
 
                     if ($jumlah1 >= 0 && $jumlah1 <= 4) {
